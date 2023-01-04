@@ -128,6 +128,13 @@ class HBNBCommand(cmd.Cmd):
         for prama in pramas:
             name_value = prama.split("=")
             if len(name_value) > 1:
+                try:
+                    name_value[1] = int(name_value[1])
+                except ValueError:
+                    try:
+                        name_value[1] = float(name_value[1])
+                    except ValueError:
+                        name_value[1] = " ".join(name_value[1].split("_")).replace('"','')
                 new_instance.__dict__[name_value[0]] = name_value[1]
         storage.save()
         print(new_instance.id)
