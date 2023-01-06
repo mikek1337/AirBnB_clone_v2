@@ -3,6 +3,7 @@
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, ForeignKey, Integer, Float, Table
 from sqlalchemy.orm import relationship
+import models
 import os
 
 
@@ -42,3 +43,23 @@ class Place(BaseModel):
     latitude = 0.0
     longitude = 0.0
     amenity_ids = []
+    @property
+    def amenities(self):
+            '''
+                 Returns a list containing the amenities ids
+            '''
+            return self.amenity_ids
+
+    @amenities.setter
+    def amenities(self, obj=None):
+            '''
+                Sets the amenities ids to a list
+            '''
+            self.amenity_ids = obj.id
+            if obj.__class__.__name__ != "Amenity":
+                return
+            amenity_dict = models.storage.all(obj)
+            place_id = self.id
+            for key, val in amenity_dict.items():
+                if self.id == val.place_id:
+                    self.amenity_ids.append(val.id)
