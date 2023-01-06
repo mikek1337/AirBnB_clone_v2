@@ -4,6 +4,7 @@ from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String
 import os
 
+
 class User(BaseModel):
     """This class defines a user by various attributes"""
     if os.getenv("HBNB_STORAGE_TYPE") == "db":
