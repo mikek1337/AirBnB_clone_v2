@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ Console Module """
+import re
 import cmd
 import sys
 from models.base_model import BaseModel
@@ -115,29 +116,35 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """ Create an object of any class"""
-        pramas = args.split(" ")
-        if not pramas:
+        if len(args) == 0:
             print("** class name missing **")
             return
-        
-        elif pramas[0] not in HBNBCommand.classes:
+        try:
+            args = re.split("\s|=", args)
+            new_instance = eval(args[0])()
+
+            for idx in range(1, len(args), 2):
+                key = args[idx]
+                value = args[idx + 1]
+                try:
+                    new_instance.__getattribute__(key)
+                except AttributeError:
+                    continue
+                if re.search("^\".*\"$", value) is not None:
+                    value = value.replace("_", " ")
+                    value = value.replace("\"", "")
+                elif "." in value:
+                    value = float(value)
+                elif re.search("\d.*", value) is not None:
+                    value = int(value)
+                else:
+                    continue
+                setattr(new_instance, key, value)
+            new_instance.save()
+            print(new_instance.id)
+        except NameError:
             print("** class doesn't exist **")
             return
-        new_instance = HBNBCommand.classes[pramas[0]]()
-        for prama in pramas:
-            name_value = prama.split("=")
-            if len(name_value) > 1:
-                try:
-                    name_value[1] = int(name_value[1])
-                except ValueError:
-                    try:
-                        name_value[1] = float(name_value[1])
-                    except ValueError:
-                        name_value[1] = " ".join(name_value[1].split("_")).replace('"','')
-                new_instance.__dict__[name_value[0]] = name_value[1]
-        storage.save()
-        print(new_instance.id)
-        storage.save()
 
     def help_create(self):
         """ Help information for the create method """
