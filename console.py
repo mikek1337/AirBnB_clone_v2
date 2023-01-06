@@ -121,7 +121,6 @@ class HBNBCommand(cmd.Cmd):
             return
         
         elif pramas[0] not in HBNBCommand.classes:
-            print(pramas[0])
             print("** class doesn't exist **")
             return
         new_instance = HBNBCommand.classes[pramas[0]]()
