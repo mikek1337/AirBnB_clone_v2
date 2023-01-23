@@ -1,7 +1,7 @@
 from fabric.api import run, env
 from datetime import datetime
 
-env.host = "127.0.0.1"
+env.hosts = "127.0.0.1"
 
 
 def do_pack():
