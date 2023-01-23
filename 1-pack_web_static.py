@@ -1,6 +1,5 @@
 from fabric.api import run, env
 from datetime import datetime
-env.host = 'localhost'
 
 
 def do_pack():
