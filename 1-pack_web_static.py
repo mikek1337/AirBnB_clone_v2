@@ -5,7 +5,6 @@ env.hosts = "127.0.0.1"
 
 
 def do_pack():
-    local("git clone https://github.com/mikek1337/AirBnb_clone_v2.git")
     local("cd ./AirBnb_clone_v2")
     local("mkdir versions > /dev/null 2>&1")
 
