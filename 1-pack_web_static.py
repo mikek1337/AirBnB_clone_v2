@@ -5,7 +5,6 @@
 from fabric.api import local, env
 import datetime
 from os.path import isdir
-env.hosts = "127.0.0.1"
 
 
 def do_pack():
