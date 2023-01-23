@@ -3,7 +3,7 @@
 """create archive."""
 
 from fabric.api import local, env
-import datetime
+from datetime import datetime
 from os.path import isdir
 
 
