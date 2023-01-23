@@ -1,6 +1,8 @@
 from fabric.api import run, env
 from datetime import datetime
 
+env.host = "127.0.0.1"
+
 
 def do_pack():
     run("git clone https://github.com/mikek1337/AirBnb_clone_v2.git")
