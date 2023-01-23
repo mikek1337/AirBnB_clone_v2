@@ -21,27 +21,7 @@ sudo ln -s /data/web_static/releases/test/ /data/web_static/current
 
 sudo chown -hR ubuntu:ubuntu /data/
 
-server_config='server {
-                listen 80;
-                listen [::]:80;
-                root /data/web_static/current;
-                index index.html index.htm index.nginx-debian.html
-                server_name mikejourney.tech www.mikejourney.tech;
-                location /hbnb_static/ {
-                        alias /data/web_static/current/;
-                        try_files $uri $uri/ =404;
-                }
-                if ($request_filename ~ redirect_me){
-                        rewrite ^ https://mikejourney.tech/ permanent;
-                }
-                error_page 404 /error_404.html;
-                location = /error_404.html {
-                        internal;
-                }
-}'
+sudo sed -i '38i\\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}\n' /etc/nginx/sites-available/default
 
-echo "$server_config" >> /etc/nginx/sites-available/default
-
-ls -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 
 sudo service nginx restart
