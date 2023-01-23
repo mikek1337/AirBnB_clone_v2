@@ -39,4 +39,4 @@ server_config="server {
                 }
 }"
 
-sudo echo $server_config >> /etc/nginx/sites-available/default
+echo "$server_config" >> /etc/nginx/sites-available/default
