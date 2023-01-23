@@ -21,8 +21,8 @@ sudo ln -s /data/web_static/releases/test/ /data/web_static/current
 
 sudo chown -R ubuntu:ubuntu /data/
 
-server_config="server {
-                listen 80 ;
+server_config='server {
+                listen 80 mikejourney.tech;
                 listen [::]:80 default_server;
                 root /data/web_static/current;
                 index index.html index.htm index.nginx-debian.html
@@ -37,6 +37,6 @@ server_config="server {
                 location = /error_404.html {
                         internal;
                 }
-}"
+}'
 
 echo "$server_config" >> /etc/nginx/sites-available/default
