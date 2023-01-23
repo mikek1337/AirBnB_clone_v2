@@ -27,7 +27,8 @@ server_config='server {
                 root /data/web_static/current;
                 index index.html index.htm index.nginx-debian.html
                 server_name mikejourney.tech www.mikejourney.tech;
-                location / {
+                location /hbnb_static/ {
+                        alias /data/web_static/current/;
                         try_files $uri $uri/ =404;
                 }
                 if ($request_filename ~ redirect_me){
