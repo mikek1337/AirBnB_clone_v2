@@ -1,10 +1,7 @@
 #!/usr/bin/python3
 
 """First flask route."""
-
-from flask import Flask
-app = Flask(__name__)
-
+from web_flask import app
 
 @app.route('/', strict_slashes=False)
 def hello_hbnb():
