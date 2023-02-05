@@ -24,7 +24,7 @@ def c_text(text):
     """# C route."""
     text = str(text)
     text = text.split("_")
-    text = "  ".join(text)
+    text = " ".join(text)
     return "C " + text
 
 
