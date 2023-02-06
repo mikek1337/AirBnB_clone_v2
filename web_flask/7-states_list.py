@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 
 @app.teardown_appcontext
-def teardown():
+def teardown(exception):
     """Deserilize all."""
     storage.close()
 
@@ -17,9 +17,8 @@ def teardown():
 @app.route("/states_list", strict_slashes=False)
 def index():
     """Index page."""
-    states = storage.all()
-    print(states)
-    return states
+    states = sorted(list(storage.all("State").values()), key=lambda x: x.name)
+    return render_template("7-states_list.html", states=states)
 
 
 if __name__ == "__main__":
