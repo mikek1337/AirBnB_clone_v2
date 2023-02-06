@@ -2,7 +2,7 @@
 
 """# using url parameter."""
 
-from flask import Flask
+from flask import Flask, abort
 
 app = Flask(__name__)
 
@@ -39,11 +39,13 @@ def python_text(text="is cool"):
 
 
 @app.route("/number/<n>")
-def num_route(n):
+def num_route(n=0):
     """# return n is a number if a number."""
-    if isinstance(n, int):
-        return "n is a number"
-    return ""
+    try:
+        num = int(n)
+        return "{numb} is a number".format(numb=num)
+    except (ValueError):
+        return abort(404)
 
 
 if __name__ == "__main__":
