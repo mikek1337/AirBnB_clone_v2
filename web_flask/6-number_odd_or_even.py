@@ -66,7 +66,8 @@ def number_odd_or_even(n=0):
         show_even = "even"
         if num % 2 != 0:
             show_even = "odd"
-        return render_template("6-number_odd_or_even.html", num=num, show_even=show_even)
+        return render_template("6-number_odd_or_even.html",
+                               num=num, show_even=show_even)
     except (ValueError):
         return abort(404)
 
